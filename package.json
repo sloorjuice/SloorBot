@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "discord.js": "^14.23.2",
+    "dotenv": "^17.2.3",
+    "minecraft-server-util": "^5.4.4",
+    "mineflayer": "^4.33.0"
+  }
+}
