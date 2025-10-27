@@ -72,6 +72,14 @@ client.once('clientReady', () => {
 });
 
 client.on('interactionCreate', async interaction => {
+    if (interaction.isButton() && interaction.customId === '420_checkmark') {
+        const roleId = '1427323738147524689';
+        const member = await interaction.guild.members.fetch(interaction.user.id);
+        await member.roles.add(roleId);
+        await interaction.reply({ content: 'You now have access to #420!', ephemeral: true});
+        return;
+    }
+
     if (!interaction.isChatInputCommand()) return;
 
     if (interaction.commandName === 'ping') {
@@ -200,14 +208,6 @@ client.on('interactionCreate', async interaction => {
 
         await interaction.deferReply({ ephemeral: true });
         await interaction.deleteReply();
-        return;
-    }
-
-    if (interaction.isButton() && interaction.customId === '420_checkmark') {
-        const roleId = '1427323738147524689';
-        const member = await interaction.guild.members.fetch(interaction.user.id);
-        await member.roles.add(roleId);
-        await interaction.reply({ content: 'You now have access to #420!', ephemeral: true});
         return;
     }
 });
