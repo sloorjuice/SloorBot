@@ -200,19 +200,14 @@ client.on('interactionCreate', async interaction => {
 
         await interaction.deferReply({ ephemeral: true });
         await interaction.deleteReply();
+        return;
+    }
 
-        const collector = interaction.channel.createMessageComponentCollector({
-            filter: i => i.customId === '420_checkmark',
-            time: 60000,
-            max: 1
-        });
-
-        collector.on('collect', async i => {
-            const roleId = '1427323738147524689';
-            const member = await i.guild.members.fetch(i.user.id);
-            await member.roles.add(roleId);
-            await i.reply({ content: 'You now have access to #420!', ephemeral: true });
-        });
+    if (interaction.isButton() && interaction.customId === '420_checkmark') {
+        const roleId = '1427323738147524689';
+        const member = await interaction.guild.members.fetch(interaction.user.id);
+        await member.roles.add(roleId);
+        await interaction.reply({ content: 'You now have access to #420!', ephemeral: true});
         return;
     }
 });
